@@ -1,0 +1,9 @@
+tree("Root")
+	fallback
+		sequence
+			IsLowHealth
+			MoveToSafePoint
+		sequence
+			MoveToAttackPoint
+			Attack
+		Idle

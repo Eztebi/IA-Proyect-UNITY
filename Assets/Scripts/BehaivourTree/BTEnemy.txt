@@ -1,0 +1,16 @@
+tree("Root")
+	fallback
+		tree "TFlee"
+		tree "TChase"
+		Patrol
+
+tree("TFlee")
+	sequence
+		IsLowHealth
+		IsPlayerInRange
+		Flee
+
+tree("TChase")
+	sequence
+		IsPlayerInRange
+		Chase
