@@ -4,7 +4,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;
     public float damage = 10f;
-    public SimpleEnemyController sEnemy;
+    public FuzzyController sEnemy;
     private void Update()
     {
         float h = Input.GetAxis("Horizontal");
