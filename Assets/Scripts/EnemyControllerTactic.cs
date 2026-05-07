@@ -66,4 +66,35 @@ public class EnemyControllerTactic : MonoBehaviour
             Task.current.Succeed();
         }
     }
+    [Task]
+    public void MoveToRangeAttackPoint()
+    {
+        if (goal == null)
+        {
+            goal = tacticas.GetBestPoint(IAEstado.RangedAttack);
+        }
+        if (goal == null)
+        {
+            Task.current.Fail();
+            return;
+        }
+
+        agente.SetDestination(goal.position);
+
+        if (!agente.pathPending && agente.remainingDistance < 1.5f)
+        {
+            goal = null;
+            Task.current.Succeed();
+        }
+    }
+    [Task]
+    public bool IsPlayerFar()
+    {
+        return Vector3.Distance(transform.position, player.position) > 20f;
+    }
+    [Task]
+    public bool IsPlayerClose()
+    {
+        return Vector3.Distance(transform.position, player.position) <= 7f;
+    }
 }

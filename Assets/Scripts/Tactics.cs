@@ -9,6 +9,7 @@ public class Tactics : MonoBehaviour
     public float weightDistance = 1f;
     public float weightCover = 1.5f;
     public float weightHeight = 1f;
+    public float visibilityWeight = 2f;
     float EvaluatePoint(Transform point, IAEstado state)
     {
         float distance = Vector3.Distance(point.position, player.position);
@@ -20,14 +21,20 @@ public class Tactics : MonoBehaviour
 
         float coverScore = point.GetComponent<Point>().coverValue;
 
-        if(state == IAEstado.Attack)
+        float visibilityScore = GetVisibilityScore(point);
+        if (state == IAEstado.Attack)
         {
-            return (weightDistance * (1 - distanceScore)) + (weightCover * coverScore * 0.5f) + (weightHeight * heightScore);            
+            return (weightDistance * (1 - distanceScore)) + (weightCover * coverScore * 0.5f) + (weightHeight * heightScore) + (visibilityWeight * visibilityScore);
         }
-        else
+        else if (state == IAEstado.Flee)
         {
-            return (weightDistance * distanceScore) + (weightCover * coverScore) + (weightCover * heightScore);
+            return (weightDistance * distanceScore) + (weightCover * coverScore) + (weightHeight * heightScore) + (visibilityWeight * visibilityScore);
         }
+        else if (state == IAEstado.RangedAttack)
+        {
+            return (weightDistance * (1 - distanceScore - 0.5f)) + (weightCover * coverScore * 0.5f) + (weightHeight * heightScore) + (visibilityWeight * visibilityScore);
+        }
+        return 0;
     }
 
     public Transform GetBestPoint(IAEstado state)
@@ -46,5 +53,18 @@ public class Tactics : MonoBehaviour
             }
         }
         return bestPoint;
+    }
+    public float GetVisibilityScore(Transform point)
+    {
+        Vector3 dir= (player.position - point.position).normalized;
+
+        float distance = Vector3.Distance(point.position, player.position);
+
+        if (!Physics.Raycast(point.position, dir, distance))
+        {
+            return 1f;
+        }
+
+        return 0f;
     }
 }

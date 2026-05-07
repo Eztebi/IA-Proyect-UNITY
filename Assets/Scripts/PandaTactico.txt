@@ -4,6 +4,11 @@ tree("Root")
 			IsLowHealth
 			MoveToSafePoint
 		sequence
+			IsPlayerFar
+			MoveToRangeAttackPoint
+			Attack
+		sequence
+			IsPlayerClose
 			MoveToAttackPoint
 			Attack
 		Idle

@@ -1,5 +1,6 @@
 public enum IAEstado
 {
     Attack,
-    Flee
+    Flee,
+    RangedAttack
 }
