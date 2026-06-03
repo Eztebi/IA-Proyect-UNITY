@@ -160,7 +160,7 @@ MonoBehaviour:
   enemyIndex: 0
   totalEnemies: 8
   surroundRadius: 5
-  behaviour: 0
+  behaviour: 3
   preferedDist: 6
 --- !u!54 &840395480
 Rigidbody:
@@ -570,7 +570,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &1114379881
 CapsuleCollider:
@@ -723,7 +723,7 @@ MonoBehaviour:
   enemyIndex: 0
   totalEnemies: 8
   surroundRadius: 5
-  behaviour: 0
+  behaviour: 1
   preferedDist: 6
 --- !u!54 &1360869601
 Rigidbody:
@@ -888,7 +888,7 @@ MonoBehaviour:
   enemyIndex: 0
   totalEnemies: 8
   surroundRadius: 5
-  behaviour: 0
+  behaviour: 2
   preferedDist: 6
 --- !u!54 &1776187732
 Rigidbody:

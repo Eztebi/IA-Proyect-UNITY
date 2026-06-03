@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8619182675525781381
+--- !u!1 &2741212977581517128
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5719933711074198207}
-  - component: {fileID: 520948071457255055}
-  - component: {fileID: 886413825207672417}
-  - component: {fileID: 2749519985593582983}
-  - component: {fileID: 1831266208694861616}
+  - component: {fileID: 6290458400488205788}
+  - component: {fileID: 3527599201868842551}
+  - component: {fileID: 1096146059352478079}
+  - component: {fileID: 2134809918458333810}
+  - component: {fileID: 6441242474973707357}
   m_Layer: 0
-  m_Name: BosqueCelula
+  m_Name: CelulaMuro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5719933711074198207
+--- !u!4 &6290458400488205788
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8619182675525781381}
+  m_GameObject: {fileID: 2741212977581517128}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.06403, y: 0, z: -0.09358}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 25.28198, y: 0, z: 22.56317}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &520948071457255055
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!33 &3527599201868842551
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8619182675525781381}
+  m_GameObject: {fileID: 2741212977581517128}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &886413825207672417
+--- !u!23 &1096146059352478079
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8619182675525781381}
+  m_GameObject: {fileID: 2741212977581517128}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -92,13 +92,13 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2749519985593582983
+--- !u!64 &2134809918458333810
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8619182675525781381}
+  m_GameObject: {fileID: 2741212977581517128}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -114,17 +114,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1831266208694861616
+--- !u!114 &6441242474973707357
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8619182675525781381}
+  m_GameObject: {fileID: 2741212977581517128}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45153929b710853409ec15124441e390, type: 3}
+  m_Script: {fileID: 11500000, guid: 534d1ad15c8574948a87587564586e76, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CelulaBosque
-  currentState: 0
-  render: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::CelulaCueva
+  isWall: 0

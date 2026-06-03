@@ -1,10 +1,6 @@
-public enum EstadoCelula
-{
+public enum EstadoCelula {
     Empty,
     Tree,
     Burning,
     Ash
 }
-
-
-
