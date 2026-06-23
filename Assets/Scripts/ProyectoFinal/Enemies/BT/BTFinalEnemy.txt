@@ -1,0 +1,24 @@
+tree("Root")
+	fallback
+		tree "TChase"
+		tree "TInvestigateSound"
+		tree "TSearchLastPosition"
+		sequence
+			Patrol
+			Wait 2.0
+
+tree("TChase")
+	sequence
+		CanSeePlayer
+		Chase
+
+tree("TInvestigateSound")
+	sequence
+		CanHearPlayer
+		InvestigateSound
+
+tree("TSearchLastPosition")
+	sequence
+		HasLastKnownPosition
+		SearchLastPosition
+		Wait 2.0
