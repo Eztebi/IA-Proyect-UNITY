@@ -95,5 +95,26 @@ public class PlayerMovement : MonoBehaviour
         collider.enabled = true;
         renderer.enabled = true;
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Floor"))
+        {
+            FloorCell floor = other.GetComponent<FloorCell>();
 
+            if (floor == null) return;
+
+            switch (floor.type)
+            {
+                case FloorType.low:
+                    noiseRadius = 5f;
+                    break;
+                case FloorType.medium:
+                    noiseRadius = 10f;
+                    break;
+                case FloorType.high:
+                    noiseRadius = 15f;
+                    break;
+            }
+        }
+    }
 }

@@ -25,12 +25,6 @@ public class GeneradorCuevas : MonoBehaviour {
         StartCoroutine(GenerateCave());
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            Regenerate();
-        }
-    }
-
     void GenerateGrid() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
