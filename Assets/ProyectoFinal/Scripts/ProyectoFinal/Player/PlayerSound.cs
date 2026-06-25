@@ -22,14 +22,4 @@ public class PlayerSound : MonoBehaviour
             noiseGO.transform.localScale = new Vector3(playerRef.GetNoise() * playerRef.GetNoiseRaidus(), noiseGO.transform.localScale.y, playerRef.GetNoise() * playerRef.GetNoiseRaidus());
         }
     }
-    private void OnDrawGizmos()
-    {
-        if (playerRef == null) return;
-
-        float noise = playerRef.GetNoise();
-        float radius = noise * playerRef.GetNoiseRaidus();
-
-        Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(transform.position, radius);
-    }
 }

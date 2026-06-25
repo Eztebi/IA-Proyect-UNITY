@@ -1,4 +1,5 @@
 using Panda;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering;
@@ -24,6 +25,7 @@ public class BTFinalEnemy : MonoBehaviour
     private bool hasLastKnownPosition = false;
 
     public LineRenderer[] visionLines;
+    [SerializeField] TextMeshProUGUI text;
 
     void Start()
     {
@@ -43,6 +45,7 @@ public class BTFinalEnemy : MonoBehaviour
             visionLines[i].startWidth = 0.02f;
             visionLines[i].endWidth = 0.02f;
         }
+        text = GetComponentInChildren<TextMeshProUGUI>();
     }
     private void Update()
     {
@@ -111,6 +114,7 @@ public class BTFinalEnemy : MonoBehaviour
     [Task]
     public void Chase()
     {
+        text.text = "!";
         if (playerRef.IsHidding())
         {
             hasLastKnownPosition = false;
@@ -126,6 +130,7 @@ public class BTFinalEnemy : MonoBehaviour
     [Task]
     public void InvestigateSound()
     {
+        text.text = "?";
         lastKnownPosition = player.position;
         movementController.MoveTowards(player.position);
         hasLastKnownPosition = true;
@@ -148,6 +153,7 @@ public class BTFinalEnemy : MonoBehaviour
     [Task]
     public void SearchLastPosition()
     {
+        text.text = "?";
 
         movementController.MoveTowards(lastKnownPosition);
 
@@ -176,6 +182,8 @@ public class BTFinalEnemy : MonoBehaviour
     [Task]
     public void Patrol()
     {
+        text.text = ".";
+
         searchAroundTimes = 0;
         hasLastKnownPosition = false;
         if (IsPlayerOnSight())

@@ -82,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
     public void Die()
     {
         isDeath = true;
+        GameManager.Instance.Lose();
     }
     public void Hide()
     {
@@ -116,5 +117,17 @@ public class PlayerMovement : MonoBehaviour
                     break;
             }
         }
+    }
+    public void NotPlaying()
+    {
+        isHiding = true;
+        collider.enabled = false;
+        renderer.enabled = false;
+    }
+    public void StartPlaying()
+    {
+        isHiding = false;
+        collider.enabled = true;
+        renderer.enabled = true;
     }
 }

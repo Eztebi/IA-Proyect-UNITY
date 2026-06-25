@@ -12,8 +12,6 @@ public class FloorGenerator : MonoBehaviour
     [Range(0f, 1f)]
     public float mediumChance = 0.35f;
 
-    // high = lo que reste
-
     public int simulationSteps = 5;
     public GameObject cellPrefab;
 
@@ -26,19 +24,8 @@ public class FloorGenerator : MonoBehaviour
         nextState = new FloorType[width, height];
 
         GenerateGrid();
-        StartCoroutine(SimulateZones());
+        StartCoroutine(SimulateFloor());
     }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Regenerate();
-        }
-    }
-
-    // ---------------- GRID INICIAL ----------------
-
     void GenerateGrid()
     {
         Renderer prefabRenderer = cellPrefab.GetComponent<Renderer>();
@@ -48,14 +35,8 @@ public class FloorGenerator : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                GameObject obj = Instantiate(cellPrefab);
-                obj.transform.parent = transform;
-
-                obj.transform.position = new Vector3(
-                    x * cellSize.x,
-                    0,
-                    y * cellSize.z
-                );
+                Vector3 cellpos = new Vector3(x * cellSize.x,0,y * cellSize.z);
+                GameObject obj = Instantiate(cellPrefab,cellpos,transform.rotation,transform);
 
                 FloorCell cell = obj.GetComponent<FloorCell>();
 
@@ -66,35 +47,31 @@ public class FloorGenerator : MonoBehaviour
             }
         }
     }
-
     FloorType GetRandomFloorType()
     {
-        float r = Random.value;
+        float rand = Random.value;
 
-        if (r < lowChance)
+        if (rand < lowChance)
             return FloorType.low;
-        else if (r < lowChance + mediumChance)
+        else if (rand < lowChance + mediumChance)
             return FloorType.medium;
         else
             return FloorType.high;
     }
-
-    // ---------------- SIMULACIÓN ----------------
-
     void Simulate()
     {
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                nextState[x, y] = GetDominantNeighborType(x, y);
+                nextState[x, y] = FloorNeighCount(x, y);
             }
         }
 
         ApplyNextState();
     }
 
-    FloorType GetDominantNeighborType(int x, int y)
+    FloorType FloorNeighCount(int x, int y)
     {
         int low = 0;
         int medium = 0;
@@ -128,7 +105,6 @@ public class FloorGenerator : MonoBehaviour
             }
         }
 
-        // se queda con el tipo dominante
         if (low >= medium && low >= high)
             return FloorType.low;
 
@@ -149,24 +125,12 @@ public class FloorGenerator : MonoBehaviour
         }
     }
 
-    IEnumerator SimulateZones()
+    IEnumerator SimulateFloor()
     {
         for (int i = 0; i < simulationSteps; i++)
         {
             Simulate();
             yield return new WaitForSeconds(0.5f);
         }
-    }
-
-    void Regenerate()
-    {
-        foreach (Transform child in transform)
-        {
-            Destroy(child.gameObject);
-        }
-
-        StopAllCoroutines();
-        GenerateGrid();
-        StartCoroutine(SimulateZones());
     }
 }
