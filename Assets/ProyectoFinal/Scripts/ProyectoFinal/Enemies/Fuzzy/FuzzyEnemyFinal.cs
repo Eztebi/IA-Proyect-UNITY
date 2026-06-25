@@ -20,7 +20,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     void Update()
     {
-        float noise = playerRef.GetNoise(); // 0–1
+        float noise = playerRef.GetNoise(); 
         float distance = Vector3.Distance(transform.position, player.position);
 
         float lowNoise = LowNoise(noise);
@@ -34,8 +34,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         float ruleInvestigate = AND(midNoise, midDist);
         float ruleChase = AND(highNoise, nearDist);
         
-
-        float patrol = rulePatrol * .7f;
+        float patrol = rulePatrol * .5f;
         float investigate = ruleInvestigate * .8f;
         float chase = ruleChase * 1.0f;
 
@@ -75,10 +74,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         if (!CanReach(point))
         {
-            Vector3 point = new Vector3(
-            transform.position.x + Random.Range(-5, 5),
-            transform.position.y,
-            transform.position.z + Random.Range(-5, 5));
+            Vector3 point = new Vector3(transform.position.x + Random.Range(-5, 5),transform.position.y,transform.position.z + Random.Range(-5, 5));
         }
         text.text = "?";
 

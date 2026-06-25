@@ -67,10 +67,8 @@ public class FloorGenerator : MonoBehaviour
                 nextState[x, y] = FloorNeighCount(x, y);
             }
         }
-
         ApplyNextState();
     }
-
     FloorType FloorNeighCount(int x, int y)
     {
         int low = 0;
@@ -104,16 +102,12 @@ public class FloorGenerator : MonoBehaviour
                 }
             }
         }
-
         if (low >= medium && low >= high)
             return FloorType.low;
-
         if (medium >= low && medium >= high)
             return FloorType.medium;
-
         return FloorType.high;
     }
-
     void ApplyNextState()
     {
         for (int x = 0; x < width; x++)
@@ -124,7 +118,6 @@ public class FloorGenerator : MonoBehaviour
             }
         }
     }
-
     IEnumerator SimulateFloor()
     {
         for (int i = 0; i < simulationSteps; i++)

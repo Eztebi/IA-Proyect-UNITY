@@ -1,4 +1,5 @@
 using Panda;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
@@ -19,6 +20,8 @@ public class BTFinalEnemy : MonoBehaviour
     public float arrivedDistance = 1.5f;
     private EnemyFinalController movementController;
 
+    [Header("HidingSpots")]
+    public List<Transform> hidingSpots;
 
     [SerializeField]private Vector3 lastKnownPosition;
     private Vector3 patrolPoint;
@@ -68,7 +71,6 @@ public class BTFinalEnemy : MonoBehaviour
         if (player == null || eyePoint == null || playerRef.IsHidding()) return false;
 
         Vector3 origin = eyePoint.position;
-        Vector3 target = (player.position + Vector3.up * 1.5f - origin).normalized;
 
         float halfAngle = viewAngle * 0.5f;
         float step = viewAngle / 9f;
@@ -97,8 +99,7 @@ public class BTFinalEnemy : MonoBehaviour
     [Task]
     bool CanHearPlayer()
     {
-        if (playerRef == null || player == null)
-            return false;
+        if (playerRef == null || player == null) return false;
 
         float noise = playerRef.GetNoise();
         float dist = Vector3.Distance(transform.position, player.position);
@@ -164,18 +165,38 @@ public class BTFinalEnemy : MonoBehaviour
             Task.current.Fail();
             return;
         }
-            lastKnownPosition = new Vector3(
-            player.transform.position.x + Random.Range(-5f, 5f),
-            player.transform.position.y,
-            player.transform.position.z + Random.Range(-5f, 5f));
+            lastKnownPosition = new Vector3(player.transform.position.x + Random.Range(-5f, 5f),player.transform.position.y,player.transform.position.z + Random.Range(-5f, 5f));
             searchAroundTimes++;
+
             if (searchAroundTimes >= 3)
             {
-                hasLastKnownPosition= false;
+                Transform hide = GetClosestHidingSpot();
+
+                if (hide != null)
+                {
+                    lastKnownPosition = hide.position;
+                }
+
+                hasLastKnownPosition = false;
                 searchAroundTimes = 0;
                 Task.current.Succeed();
             }
         }
+    }
+    Transform GetClosestHidingSpot()
+    {
+        Transform closest = null;
+        float bestDist = 100;
+        foreach (var hide in hidingSpots)
+        {
+            float dist = Vector3.Distance(transform.position, hide.position);
+            if (dist < bestDist)
+            {
+                bestDist = dist;
+                closest = hide;
+            }
+        }
+        return closest;
     }
     [SerializeField]private int searchAroundTimes = 0;
 
@@ -213,11 +234,7 @@ public class BTFinalEnemy : MonoBehaviour
     }
     Vector3 GetRandomPoint(float range)
     {
-        return new Vector3(
-            transform.position.x + Random.Range(-range, range),
-            transform.position.y,
-            transform.position.z + Random.Range(-range, range)
-        );
+        return new Vector3(transform.position.x + Random.Range(-range, range),transform.position.y,transform.position.z + Random.Range(-range, range));
     }
     bool CanReach(Vector3 target)
     {
