@@ -8,4 +8,11 @@ public class Exit : MonoBehaviour
             GameManager.Instance.Win();
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Player"))
+        {
+            GameManager.Instance.Win();
+        }
+    }
 }
